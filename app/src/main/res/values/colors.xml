@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Core Brand Colors -->
+    <color name="kumbuka_primary">#00BCD4</color>       <!-- Cyan (Main color) -->
+    <color name="kumbuka_primary_dark">#0097A7</color>  <!-- Darker Cyan -->
+    <color name="kumbuka_accent">#4DD0E1</color>        <!-- Lighter Cyan for buttons/highlights -->
+
+    <!-- Background & Surfaces -->
+    <color name="background_light">#F0FCFF</color>      <!-- Soft light cyan background -->
+    <color name="surface_white">#FFFFFF</color>         <!-- Pure white surface -->
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>          <!-- Dark text -->
+    <color name="text_secondary">#757575</color>        <!-- Medium gray text -->
+
+    <!-- Button Text / AppBar Text -->
+    <color name="button_text">#FFFFFF</color>
+
+    <!-- Icons & Dividers -->
+    <color name="icon_inactive">#BDBDBD</color>         <!-- Inactive icons -->
+    <color name="divider">#E0E0E0</color>               <!-- Divider lines -->
+
+    <!-- Defaults -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
