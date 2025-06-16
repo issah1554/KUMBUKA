@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510844934200",
+    "project_id": "kumbuka-333f0",
+    "storage_bucket": "kumbuka-333f0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510844934200:android:a4212179416fc09ecb6ecd",
+        "android_client_info": {
+          "package_name": "com.example.issah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACxI4eMLTO_mkdGsmYyqdwbYqoc5PJb14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

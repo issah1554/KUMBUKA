@@ -29,7 +29,6 @@ android {
 }
 
 dependencies {
-
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -37,4 +36,13 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+//    implementation libs.firebase.auth
+    implementation 'com.google.firebase:firebase-auth:22.3.1'// Firebase Auth from version catalog
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
+    implementation 'com.google.android.gms:play-services-base:18.3.0'
+    implementation 'com.google.android.gms:play-services-basement:18.3.0'
+
 }
+
+// Add this at the BOTTOM of the file:
+apply plugin: 'com.google.gms.google-services'
