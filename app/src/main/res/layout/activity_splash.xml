@@ -16,7 +16,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="100dp"
-        android:src="@drawable/kumbuka_logo"
+        android:src="@drawable/kumbuka_logo_cyan"
         android:contentDescription="@string/app_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

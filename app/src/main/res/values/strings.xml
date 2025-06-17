@@ -13,5 +13,21 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="go_to_login">Already have an account? Log in</string>
+    <string name="home">Home</string>
+    <string name="kumbuka">Kumbuka</string>
+    <string name="add">Add</string>
+    <string name="alerts">Alerts</string>
+    <string name="settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello HOME fragment</string>
+    <string name="hello_add_fragment">Hello ADD fragment</string>
+    <string name="hello_Kumbuka_fragment">Hello KUMBUKA fragment</string>
+    <string name="hello_settings_fragment">Hello SETTINGS fragment</string>
+    <string name="hello_notifications_fragment">Hello NOTIFICATIONS fragment</string>
+    <string name="hello_Home_fragment">Welcome home screen</string>
+    <string name="menu">Menu</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
 
 </resources>

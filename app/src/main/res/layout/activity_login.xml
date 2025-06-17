@@ -6,9 +6,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_light"
+    android:background="@drawable/background_img"
     android:padding="16dp"
     tools:context=".LoginActivity">
+
 
     <!-- Welcome Text -->
     <TextView

@@ -5,5 +5,31 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.IssaH" parent="Base.Theme.IssaH" />
+<!--    <style name="Theme.IssaH" parent="Base.Theme.IssaH" />-->
+
+    <style name="Theme.IssaH" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Required for toolbar -->
+        <item name="colorPrimary">@color/kumbuka_primary</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar</item>
+    </style>
+
+    <style name="Widget.Kumbuka.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="itemIconSize">24dp</item>
+        <item name="itemRippleColor">@color/kumbuka_accent</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavActiveText</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNavInactiveText</item>
+        <item name="elevation">8dp</item>
+        <item name="backgroundTint">@color/surface_white</item>
+    </style>
+
+    <style name="BottomNavActiveText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/kumbuka_primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomNavInactiveText" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textColor">@color/icon_inactive</item>
+    </style>
+
 </resources>
