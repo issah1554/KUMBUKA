@@ -3,6 +3,7 @@
     <style name="Base.Theme.IssaH" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
 <!--    <style name="Theme.IssaH" parent="Base.Theme.IssaH" />-->
@@ -31,5 +32,22 @@
     <style name="BottomNavInactiveText" parent="TextAppearance.AppCompat.Caption">
         <item name="android:textColor">@color/icon_inactive</item>
     </style>
+
+    <style name="MenuItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">12dp</item>
+        <item name="android:paddingHorizontal">8dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.Kumbuka.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextColor">@color/button_text</item>
+        <item name="android:background">@color/kumbuka_primary</item>
+        <item name="navigationIconTint">@color/button_text</item>
+    </style>
+
 
 </resources>
