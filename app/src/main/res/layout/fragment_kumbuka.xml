@@ -8,7 +8,6 @@
     android:background="@color/background_light"
     tools:context=".fragments.KumbukaFragment">
 
-    <!-- Modern Material Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/kumbuka_toolbar"
         android:layout_width="match_parent"
@@ -21,11 +20,19 @@
         app:popupTheme="@style/ThemeOverlay.Material3.Light"
         app:titleCentered="true" />
 
-    <!-- Main Content -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_Kumbuka_fragment"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/empty_state_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_items_found"
         android:gravity="center"
         android:textColor="@color/text_primary"
         android:textSize="18sp"

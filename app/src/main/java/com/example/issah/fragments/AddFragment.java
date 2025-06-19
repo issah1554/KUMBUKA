@@ -1,7 +1,10 @@
 package com.example.issah.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -19,14 +22,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.callback.ErrorInfo;
+import com.cloudinary.android.callback.UploadCallback;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.issah.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +53,10 @@ public class AddFragment extends Fragment {
     private Spinner typeSpinner;
     private Button saveButton;
 
+    private static final int PICK_IMAGE_REQUEST = 1001;
+    private Uri selectedImageUri = null;
+    private ImageView imagePreview;
+    private Button selectImageButton;
     // Formatting states
     private boolean isBold = false;
     private boolean isItalic = false;
@@ -60,6 +73,8 @@ public class AddFragment extends Fragment {
 
     private FirebaseFirestore db;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +86,18 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container, false);
+
+        // ✅ Safe initialization here
+        try {
+            MediaManager.get();
+        } catch (IllegalStateException e) {
+            MediaManager.init(requireContext(), ObjectUtils.asMap(
+                    "cloud_name", "dy6frwbfh",
+                    "api_key", "362353113232673",
+                    "api_secret","XthWYLhOw1sZAdXvAVLeqfJcNao",
+                    "secure", true
+            ));
+        }
 
         initializeViews(view);
         setupSpinner();
@@ -86,6 +113,9 @@ public class AddFragment extends Fragment {
         titleEditText = view.findViewById(R.id.titleEditText);
         contentEditText = view.findViewById(R.id.contentEditText);
         saveButton = view.findViewById(R.id.saveButton);
+        imagePreview = view.findViewById(R.id.imagePreview);
+        selectImageButton = view.findViewById(R.id.selectImageButton);
+
     }
 
     private void setupSpinner() {
@@ -133,9 +163,26 @@ public class AddFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
     }
+    private void openImagePicker() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
     private void setupSaveButton() {
         saveButton.setOnClickListener(v -> saveItem());
+        selectImageButton.setOnClickListener(v -> openImagePicker());
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            selectedImageUri = data.getData();
+            imagePreview.setImageURI(selectedImageUri);
+            imagePreview.setVisibility(View.VISIBLE);
+        }
     }
 
     private void toggleBold() {
@@ -320,6 +367,45 @@ public class AddFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    private void uploadImageToCloudinary(Uri imageUri) {
+        MediaManager.get().upload(imageUri)
+                .callback(new UploadCallback() {
+                    @Override
+                    public void onStart(String requestId) {}
+
+                    @Override
+                    public void onProgress(String requestId, long bytes, long totalBytes) {}
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        String imageUrl = resultData.get("secure_url").toString();
+                        Toast.makeText(requireContext(), "Upload successful", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        Toast.makeText(requireContext(), "Upload error: " + error.getDescription(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onReschedule(String requestId, ErrorInfo error) {}
+                })
+                .dispatch();
+    }
+
+
+    private void uploadToFirestore(Map<String, Object> item) {
+        db.collection("items")
+                .add(item)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(requireContext(), "Item saved!", Toast.LENGTH_SHORT).show();
+                    clearForm();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(requireContext(), "Error saving item: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                );
+    }
+
     private void saveItem() {
         String title = titleEditText.getText().toString().trim();
         String content = Html.toHtml(contentEditText.getText(), Html.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE);
@@ -352,15 +438,28 @@ public class AddFragment extends Fragment {
         item.put("userId", uid);
         item.put("userEmail", email);
 
-        db.collection("items")
-                .add(item)
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(requireContext(), "Item saved!", Toast.LENGTH_SHORT).show();
-                    clearForm();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Error saving item: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                );
+        // Check if image needs to be uploaded
+        if (selectedImageUri != null) {
+            MediaManager.get().upload(selectedImageUri)
+                    .callback(new UploadCallback() {
+                        @Override
+                        public void onSuccess(String requestId, Map resultData) {
+                            String imageUrl = resultData.get("secure_url").toString();
+                            item.put("imageUrl", imageUrl);
+                            uploadToFirestore(item);
+                        }
+
+                        @Override public void onStart(String requestId) {}
+                        @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+                        @Override public void onError(String requestId, ErrorInfo error) {
+                            Toast.makeText(requireContext(), "Image upload failed: " + error.getDescription(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override public void onReschedule(String requestId, ErrorInfo error) {}
+                    }).dispatch();
+        } else {
+            uploadToFirestore(item);
+        }
     }
 
     private void clearForm() {

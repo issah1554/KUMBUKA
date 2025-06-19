@@ -58,4 +58,6 @@
     <string name="color">Color</string>
     <string name="list">List</string>
     <string name="quote">Quote</string>
+    <string name="attach_image">Attach Image</string>
+    <string name="no_items_found">No item Found</string>
 </resources>
