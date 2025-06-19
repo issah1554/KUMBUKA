@@ -14,9 +14,83 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="4dp"
         app:title="@string/add_new_item"
-        app:navigationIcon="?attr/homeAsUpIndicator" />
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:menu="@menu/add_fragment_menu"/>
+
+    <!-- Formatting Toolbar -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface_white"
+        android:elevation="2dp"
+        android:paddingVertical="8dp">
+
+        <LinearLayout
+            android:id="@+id/formatting_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Undo -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_undo"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                android:enabled="false"
+                app:icon="@drawable/ic_undo" />
+
+            <!-- Redo -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_redo"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                android:enabled="false"
+                app:icon="@drawable/ic_redo" />
+
+            <!-- Bold -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_bold"
+                style="@style/FormatButtonStyle"
+                android:layout_width="48dp"
+                app:icon="@drawable/ic_format_bold" />
+
+            <!-- Italic -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_italic"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                app:icon="@drawable/ic_format_italic" />
+
+            <!-- Code -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_code"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                app:icon="@drawable/ic_code" />
+
+            <!-- Color -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_color"
+                style="@style/FormatButtonStyle"
+                android:layout_width="55dp"
+                app:icon="@drawable/ic_color_fill" />
+
+            <!-- List -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_list"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                app:icon="@drawable/ic_list" />
+
+            <!-- Quote -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_quote"
+                style="@style/FormatButtonStyle"
+                android:layout_width="50dp"
+                app:icon="@drawable/ic_quotation" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <!-- Scrollable Content -->
     <ScrollView
@@ -27,10 +101,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="4dp">
+            android:orientation="vertical">
 
             <!-- Spinner inside Card -->
             <com.google.android.material.card.MaterialCardView
@@ -44,8 +115,7 @@
                     android:id="@+id/typeSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp" />
-
+                    android:padding="14dp" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Title Field -->
@@ -69,32 +139,32 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Content Field -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/contentLayout"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:hint="@string/content"
-                app:boxCornerRadiusTopStart="16dp"
-                app:boxCornerRadiusTopEnd="16dp"
-                app:boxCornerRadiusBottomStart="16dp"
-                app:boxCornerRadiusBottomEnd="16dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/contentEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
+                    android:background="@null"
+                    android:gravity="top|start"
                     android:inputType="textMultiLine|textCapSentences"
-                    android:minLines="5"
-                    android:gravity="top|start" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:minLines="10"
+                    android:padding="16dp"
+                    android:textSize="16sp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"/>
+            </com.google.android.material.card.MaterialCardView>
 
             <!-- Save Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/save"
                 app:cornerRadius="16dp"/>
         </LinearLayout>

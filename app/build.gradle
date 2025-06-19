@@ -51,6 +51,8 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-firestore:24.9.0' //Firestore
 
+//    implementation 'com.github.yukuku:ambilwarna:2.0.1' //FOR COLORPICKER
+
 
 }
 

@@ -52,4 +52,10 @@
         <item>Inspiration</item>
     </string-array>
 
+    <string name="bold">Bold</string>
+    <string name="italic">Italic</string>
+    <string name="code">Code</string>
+    <string name="color">Color</string>
+    <string name="list">List</string>
+    <string name="quote">Quote</string>
 </resources>
