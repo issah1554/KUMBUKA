@@ -49,7 +49,6 @@
         <item>Idea</item>
         <item>Memory</item>
         <item>Quote</item>
-        <item>Inspiration</item>
     </string-array>
 
     <string name="bold">Bold</string>
@@ -60,4 +59,7 @@
     <string name="quote">Quote</string>
     <string name="attach_image">Attach Image</string>
     <string name="no_items_found">No item Found</string>
+    <string name="user_profile_image">user profile</string>
+    <string name="your_name">Your Name</string>
+    <string name="email_example_com">email@example.com</string>
 </resources>

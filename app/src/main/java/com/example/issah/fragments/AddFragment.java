@@ -63,13 +63,13 @@ public class AddFragment extends Fragment {
     private int currentColor = Color.BLACK;
 
     // Undo/Redo stacks
-    private Stack<Editable> undoStack = new Stack<>();
-    private Stack<Editable> redoStack = new Stack<>();
+    private final Stack<Editable> undoStack = new Stack<>();
+    private final Stack<Editable> redoStack = new Stack<>();
     private boolean isUndoRedo = false;
 
     // Tag management
     private static final String PENDING_STYLE_KEY = "pendingStyle";
-    private Map<String, Object> viewTags = new HashMap<>();
+    private final Map<String, Object> viewTags = new HashMap<>();
 
     private FirebaseFirestore db;
 
@@ -276,7 +276,6 @@ public class AddFragment extends Fragment {
 
         dialog.show();
     }
-
 
     private void applyTextColor(int color) {
         int start = contentEditText.getSelectionStart();
